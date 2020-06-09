@@ -1,84 +1,113 @@
 <template>
-  <v-container>
-    <v-row class="text-center">
-      <v-col cols="12">
-        <v-img
-          :src="require('../assets/logo.svg')"
-          class="my-3"
-          contain
-          height="200"
-        />
-      </v-col>
+  <div>
+    <v-carousel
+      cycle
+      :height="cheight"
+      v-resize="method1"
+      delimiter-icon="mdi-minus"
+      hide-delimiter-background
+      show-arrows-on-hover
+    >
+      <v-carousel-item v-for="(slide, i) in slides" :key="i">
+        <v-sheet :color="colors[i]" height="100%">
+          <v-row class="fill-height" align="center" justify="center">
+            <div class="display-1">{{ slide }} Slide</div>
+          </v-row>
+        </v-sheet>
+      </v-carousel-item>
+    </v-carousel>
 
-      <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to Vuetify
-        </h1>
+    <v-form v-model="valid" dark>
+      <v-container>
+        <p class="text-center text-uppercase font-weight-medium">Wall 1</p>
+        <v-row>
+          <v-col cols="12" md="6">
+            <v-text-field
+              v-model="width1"
+              :rules="widthRules"
+              color="purple darken-4"
+              label="Width"
+              type="text"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              required
+            ></v-text-field>
+          </v-col>
 
-        <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br />please join our online
-          <a href="https://community.vuetifyjs.com" target="_blank"
-            >Discord Community</a
-          >
-        </p>
-      </v-col>
-
-      <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-3">
-          What's next?
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(next, i) in whatsNext"
-            :key="i"
-            :href="next.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ next.text }}
-          </a>
+          <v-col cols="12" md="6">
+            <v-text-field
+              v-model="height1"
+              :rules="heightRules"
+              color="purple darken-4"
+              label="Height"
+              type="text"
+              inputmode="numeric"
+              required
+            ></v-text-field>
+          </v-col>
         </v-row>
-      </v-col>
 
-      <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-3">
-          Important Links
-        </h2>
+        <p class="text-center text-uppercase font-weight-medium">Wall 2</p>
+        <v-row>
+          <v-col cols="12" md="6">
+            <v-text-field
+              v-model="width2"
+              :rules="widthRules"
+              color="purple darken-4"
+              label="Width"
+              type="text"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              required
+            ></v-text-field>
+          </v-col>
 
-        <v-row justify="center">
-          <a
-            v-for="(link, i) in importantLinks"
-            :key="i"
-            :href="link.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ link.text }}
-          </a>
+          <v-col cols="12" md="6">
+            <v-text-field
+              v-model="height2"
+              :rules="heightRules"
+              color="purple darken-4"
+              label="Height"
+              type="text"
+              inputmode="numeric"
+              required
+            ></v-text-field>
+          </v-col>
         </v-row>
-      </v-col>
 
-      <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-3">
-          Ecosystem
-        </h2>
+        <p class="text-center text-uppercase font-weight-medium">Result</p>
+        <v-row>
+          <v-col cols="12" md="6">
+            <v-text-field
+              v-model="area"
+              label="Area"
+              type="text"
+              :disabled="true"
+            ></v-text-field>
+          </v-col>
 
-        <v-row justify="center">
-          <a
-            v-for="(eco, i) in ecosystem"
-            :key="i"
-            :href="eco.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ eco.text }}
-          </a>
+          <v-col cols="12" md="6">
+            <v-text-field
+              v-model="rolls"
+              label="Rolls Needed"
+              type="text"
+              :disabled="true"
+            ></v-text-field>
+          </v-col>
         </v-row>
-      </v-col>
-    </v-row>
-  </v-container>
+
+        <v-row>
+          <v-col cols="12">
+            <div class="text-center">
+              <v-btn class="ma-2" tile color="purple darken-4" dark
+                >Submit</v-btn
+              >
+            </div>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-form>
+  </div>
 </template>
 
 <script>
@@ -86,56 +115,45 @@ export default {
   name: "HelloWorld",
 
   data: () => ({
-    ecosystem: [
-      {
-        text: "vuetify-loader",
-        href: "https://github.com/vuetifyjs/vuetify-loader"
-      },
-      {
-        text: "github",
-        href: "https://github.com/vuetifyjs/vuetify"
-      },
-      {
-        text: "awesome-vuetify",
-        href: "https://github.com/vuetifyjs/awesome-vuetify"
-      }
+    colors: [
+      "indigo",
+      "warning",
+      "pink darken-2",
+      "red lighten-1",
+      "deep-purple accent-4",
     ],
-    importantLinks: [
-      {
-        text: "Documentation",
-        href: "https://vuetifyjs.com"
-      },
-      {
-        text: "Chat",
-        href: "https://community.vuetifyjs.com"
-      },
-      {
-        text: "Made with Vuetify",
-        href: "https://madewithvuejs.com/vuetify"
-      },
-      {
-        text: "Twitter",
-        href: "https://twitter.com/vuetifyjs"
-      },
-      {
-        text: "Articles",
-        href: "https://medium.com/vuetify"
-      }
+    slides: ["First", "Second", "Third", "Fourth", "Fifth"],
+    cheight: "400",
+    valid: false,
+    width1: "",
+    height1: "",
+    width2: "",
+    height2: "",
+    area: "",
+    rolls: "",
+    widthRules: [
+      (v) => !!v || "Width is required",
+      (v) => v.length <= 10 || "Width must be less than 10 characters",
     ],
-    whatsNext: [
-      {
-        text: "Explore components",
-        href: "https://vuetifyjs.com/components/api-explorer"
-      },
-      {
-        text: "Select a layout",
-        href: "https://vuetifyjs.com/layout/pre-defined"
-      },
-      {
-        text: "Frequently Asked Questions",
-        href: "https://vuetifyjs.com/getting-started/frequently-asked-questions"
+    heightRules: [
+      (v) => !!v || "Height is required",
+      (v) => v.length <= 10 || "Height must be less than 10 characters",
+    ],
+  }),
+
+  mounted: function() {
+    this.method1(); //method1 will execute at pageload
+  },
+
+  methods: {
+    method1: function() {
+      var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      if (isMobile) {
+        this.cheight = "250";
+      } else {
+        this.cheight = "400";
       }
-    ]
-  })
+    },
+  },
 };
 </script>
