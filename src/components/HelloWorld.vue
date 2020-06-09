@@ -23,6 +23,7 @@
         <v-row>
           <v-col cols="12" md="6">
             <v-text-field
+              v-on:keyup="calcArea"
               v-model="width1"
               :rules="widthRules"
               color="purple darken-4"
@@ -36,6 +37,7 @@
 
           <v-col cols="12" md="6">
             <v-text-field
+              v-on:keyup="calcArea"
               v-model="height1"
               :rules="heightRules"
               color="purple darken-4"
@@ -51,6 +53,7 @@
         <v-row>
           <v-col cols="12" md="6">
             <v-text-field
+              v-on:keyup="calcArea"
               v-model="width2"
               :rules="widthRules"
               color="purple darken-4"
@@ -64,6 +67,7 @@
 
           <v-col cols="12" md="6">
             <v-text-field
+              v-on:keyup="calcArea"
               v-model="height2"
               :rules="heightRules"
               color="purple darken-4"
@@ -99,7 +103,12 @@
         <v-row>
           <v-col cols="12">
             <div class="text-center">
-              <v-btn class="ma-2" tile color="purple darken-4" dark
+              <v-btn
+                class="ma-2"
+                type="button"
+                tile
+                color="purple darken-4"
+                dark
                 >Submit</v-btn
               >
             </div>
@@ -152,6 +161,21 @@ export default {
         this.cheight = "250";
       } else {
         this.cheight = "400";
+      }
+    },
+    calcArea: function() {
+      var area = this.width1 * this.height1;
+      var area1 = this.width2 * this.height2;
+
+      var result = area + area1;
+      var inroll = Math.ceil(result / 45);
+
+      this.area = result + " sqft";
+
+      if (inroll > 1) {
+        this.rolls = inroll + " Rolls";
+      } else {
+        this.rolls = inroll + " Roll";
       }
     },
   },

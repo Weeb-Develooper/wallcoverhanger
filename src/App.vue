@@ -9,13 +9,13 @@
 
       <v-btn
         text
-        class="d-none d-xl-flex d-lg-flex d-xl-none d-md-none d-lg-flex d-sm-none d-md-flex d-sm-flex"
+        class="d-none d-xl-flex d-lg-flex d-xl-none d-md-none d-lg-flex d-sm-none d-md-flex d-sm-flex mr-2"
       >
         <span class="mr-2">Portfolio</span>
       </v-btn>
 
       <v-switch
-        class="d-none d-xl-flex d-lg-flex d-xl-none d-md-none d-lg-flex d-sm-none d-md-flex d-sm-flex"
+        class="d-none d-xl-flex d-lg-flex d-xl-none d-md-none d-lg-flex d-sm-none d-md-flex d-sm-flex mr-2"
         v-model="$vuetify.theme.dark"
         hide-details
         :label="`${switch1}`"
@@ -28,7 +28,7 @@
             <v-icon>mdi-menu</v-icon>
           </v-btn>
         </template>
-        <v-list>
+        <v-list shaped nav dense>
           <v-list-item>
             <v-btn text>
               <span class="mr-2">Portfolio</span>
@@ -51,7 +51,7 @@
       <router-view></router-view>
     </v-content>
 
-    <v-footer class="pa-0">
+    <v-footer class="pa-0" :elevation="5">
       <v-card flat tile width="100%" color="primary">
         <v-card-text class="text-center">
           © <strong>WallcoverHanger</strong> {{ new Date().getFullYear() }}
